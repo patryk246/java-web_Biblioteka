@@ -1,0 +1,101 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleafspring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+ xmlns:th="http://www.thymeleaf.org">
+ <head th:fragment="head">
+ <meta charset="utf-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1"/>
+ <title>Biblioteka online</title>
+ <style>
+ .footer {
+ position: fixed; bottom: 0px; left: 1px; height: 50px;width: 100%;
+ }
+  th,td {border: solid 1px black;padding: 5px;}
+ul {
+     list-style: none;
+     float: left;
+}
+ul > li {
+     margin: 0;
+     padding: 0;
+     float: left; 
+     position: relative;
+     height: 30px;
+}
+ul > li > a {
+     padding: 10px; 
+     color: #444;
+     text-decoration: none;
+}
+ul > li > a:hover, 
+ul > li:hover > a {
+     color: #de5f44;
+     text-decoration: underline;
+}
+ul > li ul {
+     padding: 0;
+     position: absolute; 
+     display: none; 
+     left: 0px; 
+     top: 30px; 
+     width: 200px; 
+     text-align: left;
+     background-color: #fcfcfc;
+     border: 1px solid #ccc;
+}
+ul li:hover > ul {
+     display: block;
+}
+ul > li ul ul {
+     left: 200px; 
+     top: -1px;
+}
+ul > li ul li {
+     margin: 0; 
+     padding: 0;
+     position: relative; 
+     float: none; 
+     height: auto;
+}
+ul > li ul li a {
+     padding: 10px 20px; 
+     color: #505050; 
+     text-decoration: none;
+     display: block;
+}
+ul > li ul li a:hover,
+ul > li ul li:hover > a {
+     text-decoration: none;
+     color: #fff;
+     background-color: #f26c4f;
+}
+ </style>
+ </head>
+    <body>
+ <div th:fragment="navigationPanel" >
+ <ul class="nav" sec:authorize="isAuthenticated()">
+    <li><a th:href="@{/userBooks}">Wyświetl swoją bibliotekę</a>
+        <ul class="dropdown">
+            <li><a th:href="@{/toReadBooks}">Książki do przeczytania</a></li>
+            <li><a th:href="@{/readingBooks}">Książki aktualnie czytane</a></li>
+            <li><a th:href="@{/readedBooks}">Książki przeczytane</a></li>
+        </ul>
+    </li>
+    <li><a th:href="@{/allBooks}">Wyświetl wszystkie książki</a></li>
+    <li><a th:href="@{/newBook}">Dodaj nową książkę</a></li>
+    <li><a th:href="@{/logout}">Wyloguj się</a></li>
+ </ul>
+ <ul sec:authorize="isAnonymous()">
+    <li ><a th:href="@{/register}">Zarejestruj się</a></li>  
+    <li><a th:href="@{/login}">Zaloguj się</a></li>
+ </ul>
+     <br/><br/><br/>
+ </div>
+ 
+ <div th:fragment="footer">
+ <footer class="footer">
+ <hr/>
+ </footer>
+ </div>
+ </body>
+</html>

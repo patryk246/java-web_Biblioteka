@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head th:include="layout :: head">
+ </head>
+ <body>
+ <div th:include="layout :: navigationPanel"></div>
+ <h1>Dodaj nową książkę:</h1>
+ <form th:action="@{/newBook}" method="POST" th:object="${book}">
+     <table>
+         <tr>
+             <td>Tytuł książki</td>      
+ <td> <input type="text" th:field="*{title}" placeholder="Tytuł"/></td>
+ <td th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</td>
+ </tr>
+         <tr>
+              <td>Imię autora</td>
+ <td><input type="text" th:field="*{authorName}" placeholder="Imię autora"/></td>
+ <td th:if="${#fields.hasErrors('authorName')}" th:errors="*{authorName}">Name Error</td>
+ </tr>
+         <tr>
+             <td>Nazwisko autora</td>
+ <td><input type="text" th:field="*{authorSurname}" placeholder="Nazwisko autora"/></td>
+ <td th:if="${#fields.hasErrors('authorSurname')}" th:errors="*{authorSurname}">Name Error</td>
+ </tr>
+         <tr>
+             <td>Gatunek literacki</td>
+ <td><input type="text" th:field="*{type}" placeholder="Gatunek"/></td>
+ <td th:if="${#fields.hasErrors('type')}" th:errors="*{type}">Name Error</td>
+ </tr>
+         <tr>
+ <td><button type="submit">Dodaj książkę</button></td>
+ </tr>
+ </table>
+ </form>
+
+ <div th:include="layout :: footer"></div>
+ </body>
+</html>

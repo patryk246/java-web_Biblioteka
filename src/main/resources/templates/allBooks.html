@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head th:include="layout :: head">
+ </head>
+ <body>
+ <div th:include="layout :: navigationPanel"></div>
+ <h1>Lista książek:</h1>
+ <div th:if="${#lists.isEmpty(booklist)}">
+ Brak książek w bazie danych...
+ </div>
+ <table th:if="${!#lists.isEmpty(booklist)}">
+ <thead>
+ <tr>
+<th>Tytuł</th>
+<th>Imię autora</th>
+<th>Nazwisko autora</th>
+<th>Gatunek</th>
+<th>Dodaj książkę do biblioteki</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr th:each="book: ${booklist}">
+<td th:text="${book.title}"></td>
+<td th:text="${book.authorName}"></td>
+<td th:text="${book.authorSurname}"></td>
+<td th:text="${book.type}"></td>
+<td><a href="/addToLibrary" th:href="@{http://localhost:8080/addToLibrary(bookId=${book.bookId})}">dodaj</a></td>
+ </tr>
+ </tbody>
+ </table>
+ <div th:include="layout :: footer"></div>
+ </body>
+</html>

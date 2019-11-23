@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head th:include="layout :: head">
+ </head>
+ <body>
+ <div th:include="layout :: navigationPanel"></div>
+ <h1>Lista książek do przeczytania:</h1>
+ <div th:if="${#lists.isEmpty(userbooklist)}">
+ Brak książek w bibliotece ...
+ </div>
+ <table th:if="${!#lists.isEmpty(userbooklist)}">
+ <thead>
+ <tr>
+<th>Tytuł</th>
+<th>Imię autora</th>
+<th>Nazwisko autora</th>
+<th>Gatunek</th>
+<th>Zmień na 'Aktualnie czytaną'</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr th:each="userbook: ${userbooklist}">
+ <span th:if="${userbook.status.name() == 'TO_READ'}">
+<td th:text="${userbook.bookFK.title}"></td>
+<td th:text="${userbook.bookFK.authorName}"></td>
+<td th:text="${userbook.bookFK.authorSurname}"></td>
+<td th:text="${userbook.bookFK.type}"></td>
+<td><a href="/statusReading" th:href="@{http://localhost:8080/statusReading(userBookId=${userbook.userBookId},bookId=${userbook.bookFK.bookId})}">zmień</a></td>
+</span>
+ </tr>
+ </tbody>
+ </table>
+ <div th:include="layout :: footer"></div>
+ </body>
+</html>
